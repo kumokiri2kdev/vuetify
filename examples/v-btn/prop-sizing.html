@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-row align="center">
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <div class="text-center">
+              <div class="my-2">
+                <v-btn
+                  x-small
+                  color="secondary"
+                  dark
+                >
+                  Extra small Button
+                </v-btn>
+              </div>
+              <div class="my-2">
+                <v-btn
+                  small
+                  color="primary"
+                  dark
+                >
+                  Small Button
+                </v-btn>
+              </div>
+              <div class="my-2">
+                <v-btn
+                  color="warning"
+                  dark
+                >
+                  Normal Button
+                </v-btn>
+              </div>
+              <div class="my-2">
+                <v-btn
+                  color="error"
+                  dark
+                  large
+                >
+                  Large Button
+                </v-btn>
+              </div>
+              <div class="my-2">
+                <v-btn
+                  x-large
+                  color="success"
+                  dark
+                >
+                  Extra large Button
+                </v-btn>
+              </div>
+            </div>
+          </v-col>
+          <v-col
+            cols="12"
+            sm="6"
+          >
+            <div class="text-center">
+              <div class="my-2">
+                <v-btn
+                  color="secondary"
+                  fab
+                  x-small
+                  dark
+                >
+                  <v-icon>mdi-television</v-icon>
+                </v-btn>
+              </div>
+              <div class="my-2">
+                <v-btn
+                  color="primary"
+                  fab
+                  small
+                  dark
+                >
+                  <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+              </div>
+              <div class="my-2">
+                <v-btn
+                  color="warning"
+                  fab
+                  dark
+                >
+                  <v-icon>mdi-account-circle</v-icon>
+                </v-btn>
+              </div>
+              <div class="my-2">
+                <v-btn
+                  color="error"
+                  fab
+                  large
+                  dark
+                >
+                  <v-icon>mdi-alarm</v-icon>
+                </v-btn>
+              </div>
+              <div class="my-2">
+                <v-btn
+                  color="success"
+                  fab
+                  x-large
+                  dark
+                >
+                  <v-icon>mdi-domain</v-icon>
+                </v-btn>
+              </div>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+      }
+    });
+  </script>
+</body>
+</html>

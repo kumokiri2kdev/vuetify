@@ -27,6 +27,36 @@ v-once ディレクティブを使用すると、データは一度だけ展開�
 
 [Basic Template](../examples/templates_sentence/basic_template.html)
 
+### 条件付きレンダリング
+v-if ディレクティブ を使用すると、その条件が成立する場合のみエレメントが描画される。
+
+```
+<h1 v-if="awesome">Vue is awesome!</h1>
+```
+この場合、data の awesome の値が true の場合レンダリングされる。```this.awesome``` とは記述しなくていい。
+
+v-else を使うと、v-if が成立しなかった時の記述ができる。
+```
+<h1 v-if="awesome">Vue is awesome!</h1>
+<h1 v-else>Oh no 😢</h1>
+```
+
+v-else-if もある。
+
+```
+<div v-if="type === 'A'">
+  A
+</div>
+<div v-else-if="type === 'B'">
+  B
+</div>
+<div v-else-if="type === 'C'">
+  C
+</div>
+<div v-else>
+  Not A/B/C
+</div>
+```
 
 ## 属性
 v-bind ディレクティブを使用する事で、html のエレメントの属性を変更することができる。
