@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-combobox
+          v-model="chips"
+          :items="items"
+          chips
+          clearable
+          label="Your favorite hobbies"
+          multiple
+          prepend-icon="mdi-filter-variant"
+          solo
+        >
+          <template v-slot:selection="{ attrs, item, select, selected }">
+            <v-chip
+              v-bind="attrs"
+              :input-value="selected"
+              close
+              @click="select"
+              @click:close="remove(item)"
+            >
+              <strong>{{ item }}</strong>&nbsp;
+              <span>(interest)</span>
+            </v-chip>
+          </template>
+        </v-combobox>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        chips: ['Programming', 'Playing video games', 'Watching movies', 'Sleeping'],
+        items: ['Streaming', 'Eating'],
+      },
+      methods: {
+        remove (item) {
+          this.chips.splice(this.chips.indexOf(item), 1)
+          this.chips = [...this.chips]
+        },
+      },
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <div class="text-center">
+          <v-btn
+            v-if="!chip1 && !chip2 && !chip3 && !chip4"
+            close
+            color="primary"
+            dark
+            @click="chip1 = true, chip2 = true, chip3 = true, chip4= true"
+          >
+            Reset Chips
+          </v-btn>
+
+          <v-chip
+            v-if="chip1"
+            class="ma-2"
+            close
+            @click:close="chip1 = false"
+          >
+            Closable
+          </v-chip>
+
+          <v-chip
+            v-if="chip2"
+            class="ma-2"
+            close
+            color="red"
+            text-color="white"
+            @click:close="chip2 = false"
+          >
+            Remove
+          </v-chip>
+
+          <v-chip
+            v-if="chip3"
+            class="ma-2"
+            close
+            color="green"
+            outlined
+            @click:close="chip3 = false"
+          >
+            Success
+          </v-chip>
+
+          <v-chip
+            v-if="chip4"
+            class="ma-2"
+            close
+            color="orange"
+            label
+            outlined
+            @click:close="chip4 = false"
+          >
+            Complete
+          </v-chip>
+        </div>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        chip1: true,
+        chip2: true,
+        chip3: true,
+        chip4: true,
+      }
+    });
+  </script>
+</body>
+</html>
