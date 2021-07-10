@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-container>
+          <v-row
+            align="center"
+            justify="center"
+          >
+            <v-badge
+              bordered
+              color="error"
+              icon="mdi-lock"
+              overlap
+            >
+              <v-btn
+                class="white--text"
+                color="error"
+                depressed
+              >
+                Lock Account
+              </v-btn>
+            </v-badge>
+
+            <div class="mx-3"></div>
+
+            <v-badge
+              bordered
+              bottom
+              color="deep-purple accent-4"
+              dot
+              offset-x="10"
+              offset-y="10"
+            >
+              <v-avatar size="40">
+                <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"></v-img>
+              </v-avatar>
+            </v-badge>
+
+            <div class="mx-3"></div>
+
+            <v-badge
+              avatar
+              bordered
+              overlap
+            >
+              <template v-slot:badge>
+                <v-avatar>
+                  <v-img src="https://cdn.vuetifyjs.com/images/logos/v.png"></v-img>
+                </v-avatar>
+              </template>
+
+              <v-avatar size="40">
+                <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+              </v-avatar>
+            </v-badge>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+      }
+    });
+  </script>
+</body>
+</html>
