@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-card
+          max-width="500"
+          class="mx-auto"
+        >
+          <v-toolbar
+            :color="selection.length ? 'grey darken-4' : 'deep-purple accent-4'"
+            dark
+          >
+            <v-app-bar-nav-icon v-if="!selection.length"></v-app-bar-nav-icon>
+            <v-btn
+              v-else
+              icon
+              @click="selection = []"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+
+            <v-toolbar-title>
+              {{ selection.length ? `${selection.length} selected` : 'Photos' }}
+            </v-toolbar-title>
+
+            <v-spacer></v-spacer>
+
+            <v-scale-transition>
+              <v-btn
+                v-if="selection.length"
+                key="export"
+                icon
+              >
+                <v-icon>mdi-export-variant</v-icon>
+              </v-btn>
+            </v-scale-transition>
+            <v-scale-transition>
+              <v-btn
+                v-if="selection.length"
+                key="delete"
+                icon
+              >
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
+            </v-scale-transition>
+
+            <v-btn icon>
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </v-toolbar>
+
+          <v-card-text>
+            <v-select
+              v-model="selection"
+              :items="items"
+              multiple
+              label="Select an option"
+            ></v-select>
+          </v-card-text>
+        </v-card>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        selection: [],
+        items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+      }
+    });
+  </script>
+</body>
+</html>
