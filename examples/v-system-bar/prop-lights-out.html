@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <div>
+          <v-subheader>Lights out (light)</v-subheader>
+          <v-card
+            img="https://cdn.vuetifyjs.com/images/home/vuetify_layout2.svg"
+            height="200px"
+          >
+            <v-system-bar
+              color="primary"
+              lights-out
+            >
+              <v-spacer></v-spacer>
+              <v-icon>mdi-wifi-strength-4</v-icon>
+              <v-icon>mdi-signal-cellular-outline</v-icon>
+              <v-icon>mdi-battery</v-icon>
+              <span>12:30</span>
+            </v-system-bar>
+          </v-card>
+          <v-subheader>Lights out (dark)</v-subheader>
+          <v-card
+            img="https://cdn.vuetifyjs.com/images/home/vuetify_layout2.svg"
+            height="200px"
+          >
+            <v-system-bar
+              color="primary"
+              lights-out
+              dark
+            >
+              <v-spacer></v-spacer>
+              <v-icon>mdi-wifi-strength-4</v-icon>
+              <v-icon>mdi-signal-cellular-outline</v-icon>
+              <v-icon>mdi-battery</v-icon>
+              <span>12:30</span>
+            </v-system-bar>
+          </v-card>
+        </div>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+      }
+    });
+  </script>
+</body>
+</html>
