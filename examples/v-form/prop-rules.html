@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-container>
+          <v-row
+
+            justify="space-between"
+          >
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <v-form ref="form">
+                <v-text-field
+                  v-model="model"
+                  :counter="max"
+                  :rules="rules"
+                  label="First name"
+                ></v-text-field>
+              </v-form>
+            </v-col>
+
+            <v-col
+              cols="12"
+              md="6"
+            >
+              <v-slider
+                v-model="max"
+                label="Max characters"
+              >
+              </v-slider>
+
+              <v-checkbox
+                v-model="allowSpaces"
+                label="Allow spaces"
+              ></v-checkbox>
+
+              <v-text-field
+                v-model="match"
+                label="Value must match"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        allowSpaces: false,
+        match: 'Foobar',
+        max: 0,
+        model: 'Foobar',
+      },
+      computed: {
+        rules () {
+          const rules = []
+          if (this.max) {
+            const rule =
+              v => (v || '').length <= this.max ||
+                `A maximum of ${this.max} characters is allowed`
+            rules.push(rule)
+          }
+          if (!this.allowSpaces) {
+            const rule =
+              v => (v || '').indexOf(' ') < 0 ||
+                'No spaces are allowed'
+            rules.push(rule)
+          }
+          if (this.match) {
+            const rule =
+              v => (!!v && v) === this.match ||
+                'Values do not match'
+            rules.push(rule)
+          }
+          return rules
+        },
+      },
+      watch: {
+        match: 'validateField',
+        max: 'validateField',
+        model: 'validateField',
+      },
+      methods: {
+        validateField () {
+          this.$refs.form.validate()
+        },
+      },
+    });
+  </script>
+</body>
+</html>
