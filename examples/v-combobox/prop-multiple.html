@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-container fluid>
+          <v-row>
+            <v-col cols="12">
+              <v-combobox
+                v-model="select"
+                :items="items"
+                label="Select a favorite activity or create a new one"
+                multiple
+              ></v-combobox>
+            </v-col>
+            <v-col cols="12">
+              <v-combobox
+                v-model="select"
+                :items="items"
+                label="I use chips"
+                multiple
+                chips
+              ></v-combobox>
+            </v-col>
+            <v-col cols="12">
+              <v-combobox
+                v-model="select"
+                :items="items"
+                label="I use a scoped slot"
+                multiple
+                chips
+              >
+                <template v-slot:selection="data">
+                  <v-chip
+                    :key="JSON.stringify(data.item)"
+                    v-bind="data.attrs"
+                    :input-value="data.selected"
+                    :disabled="data.disabled"
+                    @click:close="data.parent.selectItem(data.item)"
+                  >
+                    <v-avatar
+                      class="accent white--text"
+                      left
+                      v-text="data.item.slice(0, 1).toUpperCase()"
+                    ></v-avatar>
+                    {{ data.item }}
+                  </v-chip>
+                </template>
+              </v-combobox>
+            </v-col>
+            <v-col cols="12">
+              <v-combobox
+                v-model="select"
+                label="I'm readonly"
+                chips
+                multiple
+                readonly
+              ></v-combobox>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        select: ['Vuetify', 'Programming'],
+        items: [
+          'Programming',
+          'Design',
+          'Vue',
+          'Vuetify',
+        ],        
+      }
+    });
+  </script>
+</body>
+</html>
