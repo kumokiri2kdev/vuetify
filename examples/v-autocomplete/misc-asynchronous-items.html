@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-toolbar
+          dark
+          color="teal"
+        >
+          <v-toolbar-title>State selection</v-toolbar-title>
+          <v-autocomplete
+            v-model="select"
+            :loading="loading"
+            :items="items"
+            :search-input.sync="search"
+            cache-items
+            class="mx-4"
+            flat
+            hide-no-data
+            hide-details
+            label="What state are you from?"
+            solo-inverted
+          ></v-autocomplete>
+          <v-btn icon>
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </v-toolbar>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        loading: false,
+        items: [],
+        search: null,
+        select: null,
+        states: [
+          'Alabama',
+          'Alaska',
+          'American Samoa',
+          'Arizona',
+          'Arkansas',
+          'California',
+          'Colorado',
+          'Connecticut',
+          'Delaware',
+          'District of Columbia',
+          'Federated States of Micronesia',
+          'Florida',
+          'Georgia',
+          'Guam',
+          'Hawaii',
+          'Idaho',
+          'Illinois',
+          'Indiana',
+          'Iowa',
+          'Kansas',
+          'Kentucky',
+          'Louisiana',
+          'Maine',
+          'Marshall Islands',
+          'Maryland',
+          'Massachusetts',
+          'Michigan',
+          'Minnesota',
+          'Mississippi',
+          'Missouri',
+          'Montana',
+          'Nebraska',
+          'Nevada',
+          'New Hampshire',
+          'New Jersey',
+          'New Mexico',
+          'New York',
+          'North Carolina',
+          'North Dakota',
+          'Northern Mariana Islands',
+          'Ohio',
+          'Oklahoma',
+          'Oregon',
+          'Palau',
+          'Pennsylvania',
+          'Puerto Rico',
+          'Rhode Island',
+          'South Carolina',
+          'South Dakota',
+          'Tennessee',
+          'Texas',
+          'Utah',
+          'Vermont',
+          'Virgin Island',
+          'Virginia',
+          'Washington',
+          'West Virginia',
+          'Wisconsin',
+          'Wyoming',
+        ],
+      },
+      watch: {
+        search (val) {
+          val && val !== this.select && this.querySelections(val)
+        },
+      },
+      methods: {
+        querySelections (v) {
+          this.loading = true
+          // Simulated ajax query
+          setTimeout(() => {
+            this.items = this.states.filter(e => {
+              return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
+            })
+            this.loading = false
+          }, 500)
+        },
+      },
+    });
+  </script>
+</body>
+</html>
