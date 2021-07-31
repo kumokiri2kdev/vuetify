@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <div>
+          <v-slider
+            v-model="ex1.val"
+            :color="ex1.color"
+            :label="ex1.label"
+          ></v-slider>
+
+          <v-slider
+            v-model="ex2.val"
+            :label="ex2.label"
+            :track-color="ex2.color"
+          ></v-slider>
+
+          <v-slider
+            v-model="ex3.val"
+            :label="ex3.label"
+            :thumb-color="ex3.color"
+            thumb-label="always"
+          ></v-slider>
+        </div>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        ex1: { label: 'color', val: 25, color: 'orange darken-3' },
+        ex2: { label: 'track-color', val: 75, color: 'green lighten-1' },
+        ex3: { label: 'thumb-color', val: 50, color: 'red' },        
+      }
+    });
+  </script>
+</body>
+</html>

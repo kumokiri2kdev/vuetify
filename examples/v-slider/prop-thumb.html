@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-container fluid>
+          <v-row>
+            <v-col cols="12">
+              <v-subheader class="pl-0">
+                Show thumb when using slider
+              </v-subheader>
+              <v-slider
+                v-model="slider"
+                thumb-label
+              ></v-slider>
+            </v-col>
+
+            <v-col cols="12">
+              <v-subheader class="pl-0">
+                Always show thumb label
+              </v-subheader>
+              <v-slider
+                v-model="slider"
+                thumb-label="always"
+              ></v-slider>
+            </v-col>
+
+            <v-col cols="12">
+              <v-subheader class="pl-0">
+                Custom thumb size
+              </v-subheader>
+              <v-slider
+                v-model="slider"
+                :thumb-size="24"
+                thumb-label="always"
+              ></v-slider>
+            </v-col>
+
+            <v-col cols="12">
+              <v-subheader class="pl-0">
+                Custom thumb label
+              </v-subheader>
+              <v-slider
+                v-model="slider"
+                :thumb-size="24"
+                thumb-label="always"
+              >
+                <template v-slot:thumb-label="{ value }">
+                  {{ satisfactionEmojis[Math.min(Math.floor(value / 10), 9)] }}
+                </template>
+              </v-slider>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        satisfactionEmojis: ['😭', '😢', '☹️', '🙁', '😐', '🙂', '😊', '😁', '😄', '😍'],
+        slider: 45,        
+      }
+    });
+  </script>
+</body>
+</html>

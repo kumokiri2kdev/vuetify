@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-card class="e4">
+          <v-responsive
+            :style="{ background: `rgb(${red}, ${green}, ${blue})` }"
+            height="300px"
+          ></v-responsive>
+
+          <v-card-text>
+            <v-container fluid>
+              <v-row>
+                <v-col cols="12">
+                  <v-slider
+                    v-model="red"
+                    :max="255"
+                    label="R"
+                    class="align-center"
+                  >
+                    <template v-slot:append>
+                      <v-text-field
+                        v-model="red"
+                        class="mt-0 pt-0"
+                        type="number"
+                        style="width: 60px"
+                      ></v-text-field>
+                    </template>
+                  </v-slider>
+                </v-col>
+
+                <v-col cols="12">
+                  <v-slider
+                    v-model="green"
+                    :max="255"
+                    label="G"
+                    class="align-center"
+                  >
+                    <template v-slot:append>
+                      <v-text-field
+                        v-model="green"
+                        class="mt-0 pt-0"
+                        type="number"
+                        style="width: 60px"
+                      ></v-text-field>
+                    </template>
+                  </v-slider>
+                </v-col>
+
+                <v-col cols="12">
+                  <v-slider
+                    v-model="blue"
+                    :max="255"
+                    label="B"
+                    class="align-center"
+                  >
+                    <template v-slot:append>
+                      <v-text-field
+                        v-model="blue"
+                        class="mt-0 pt-0"
+                        type="number"
+                        style="width: 60px"
+                      ></v-text-field>
+                    </template>
+                  </v-slider>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+        </v-card>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        red: 64,
+        green: 128,
+        blue: 0,
+      }
+    });
+  </script>
+  <style scoped>
+  .e4 {
+    width: 400px;
+    margin: auto;
+  }
+  </style>
+</body>
+</html>
