@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-card
+          flat
+          color="transparent"
+        >
+          <v-subheader>Min and max range slider</v-subheader>
+
+          <v-card-text>
+            <v-row>
+              <v-col class="px-4">
+                <v-range-slider
+                  v-model="range"
+                  :max="max"
+                  :min="min"
+                  hide-details
+                  class="align-center"
+                >
+                  <template v-slot:prepend>
+                    <v-text-field
+                      :value="range[0]"
+                      class="mt-0 pt-0"
+                      hide-details
+                      single-line
+                      type="number"
+                      style="width: 60px"
+                      @change="$set(range, 0, $event)"
+                    ></v-text-field>
+                  </template>
+                  <template v-slot:append>
+                    <v-text-field
+                      :value="range[1]"
+                      class="mt-0 pt-0"
+                      hide-details
+                      single-line
+                      type="number"
+                      style="width: 60px"
+                      @change="$set(range, 1, $event)"
+                    ></v-text-field>
+                  </template>
+                </v-range-slider>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        min: -50,
+        max: 90,
+        range: [-20, 70],        
+      }
+    });
+  </script>
+</body>
+</html>
