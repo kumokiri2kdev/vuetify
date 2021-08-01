@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-form>
+          <v-container>
+            <v-row>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-text-field
+                  v-model="title"
+                  :rules="rules"
+                  counter="25"
+                  hint="This field uses counter prop"
+                  label="Regular"
+                ></v-text-field>
+              </v-col>
+
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-text-field
+                  v-model="description"
+                  :rules="rules"
+                  counter
+                  maxlength="25"
+                  hint="This field uses maxlength attribute"
+                  label="Limit exceeded"
+                ></v-text-field>
+              </v-col>
+
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-text-field
+                  v-model="title"
+                  :rules="wordsRules"
+                  counter="5"
+                  hint="This field counts words instead of characters"
+                  label="Custom counter from prop"
+                  :counter-value="v => v.trim().split(' ').length"
+                ></v-text-field>
+              </v-col>
+
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-text-field
+                  v-model="title"
+                  :rules="wordsRules"
+                  counter="5"
+                  hint="This field counts words instead of characters"
+                  label="Custom counter from slot"
+                >
+                  <template v-slot:counter="{ props }">
+                    <v-counter v-bind="props" :value="title.trim().split(' ').length"></v-counter>
+                  </template>
+                </v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-form>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        title: 'Preliminary report',
+        description: 'California is a state in the western United States',
+        rules: [v => v.length <= 25 || 'Max 25 characters'],
+        wordsRules: [v => v.trim().split(' ').length <= 5 || 'Max 5 words'],        
+      }
+    });
+  </script>
+</body>
+</html>
