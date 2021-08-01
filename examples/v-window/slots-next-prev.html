@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-window show-arrows>
+          <template v-slot:prev="{ on, attrs }">
+            <v-btn
+              color="success"
+              v-bind="attrs"
+              v-on="on"
+            >Previous slide</v-btn>
+          </template>
+          <template v-slot:next="{ on, attrs }">
+            <v-btn
+              color="info"
+              v-bind="attrs"
+              v-on="on"
+            >Next slide</v-btn>
+          </template>
+          <v-window-item
+            v-for="n in 5"
+            :key="`card-${n}`"
+          >
+            <v-card
+              color="grey"
+              height="200"
+            >
+              <v-row
+                class="fill-height"
+                align="center"
+                justify="center"
+              >
+                <h1
+                  style="font-size: 5rem;"
+                  class="white--text"
+                >
+                  Slide {{ n }}
+                </h1>
+              </v-row>
+            </v-card>
+          </v-window-item>
+        </v-window>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+      }
+    });
+  </script>
+</body>
+</html>
