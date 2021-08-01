@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-hover
+            v-slot="{ hover }"
+            v-bind="$attrs"
+            v-on="$listeners"
+          >
+            <v-card
+              :elevation="hover ? 12 : 2"
+              :class="{ 'on-hover': hover }"
+              height="200"
+              max-width="350"
+              class="mx-auto"
+            >
+              <v-card-text class="my-4 text-center text-h6">
+                Hover over me!
+              </v-card-text>
+            </v-card>
+          </v-hover>
+        </v-row>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        defaults: {
+          'close-delay': 0,
+          disabled: false,
+          'open-delay': 0,
+        },
+        options: {
+          sliders: {
+            'close-delay': [0, 1000],
+            'open-delay': [0, 1000],
+          },
+        },
+        tabs: ['disabled'],
+      }
+    });
+  </script>
+  <style lang="sass" scoped>
+  .v-card.on-hover.theme--dark
+    background-color: rgba(#FFF, 0.8)
+    >.v-card__text
+      color: #000
+  </style>  
+</body>
+</html>
