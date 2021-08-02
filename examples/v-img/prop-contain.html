@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-container fluid>
+          <v-row justify="space-around">
+            <v-col cols="5">
+              <div class="text-h6 mb-1">
+                Default (cover)
+              </div>
+              <div class="subheading">
+                Matching
+              </div>
+              <v-img
+                src="https://picsum.photos/510/300?random"
+                aspect-ratio="1.7"
+              ></v-img>
+              <div class="subheading pt-4">
+                Too high
+              </div>
+              <v-img
+                src="https://picsum.photos/510/300?random"
+                aspect-ratio="2"
+              ></v-img>
+              <div class="subheading pt-4">
+                Too low
+              </div>
+              <v-img
+                src="https://picsum.photos/510/300?random"
+                aspect-ratio="1.4"
+              ></v-img>
+            </v-col>
+
+            <v-col cols="5">
+              <div class="text-h6 mb-1">
+                Contain
+              </div>
+              <div class="subheading">
+                Matching
+              </div>
+              <v-img
+                src="https://picsum.photos/510/300?random"
+                aspect-ratio="1.7"
+                contain
+              ></v-img>
+              <div class="subheading pt-4">
+                Too high
+              </div>
+              <v-img
+                src="https://picsum.photos/510/300?random"
+                aspect-ratio="2"
+                contain
+              ></v-img>
+              <div class="subheading pt-4">
+                Too low
+              </div>
+              <v-img
+                src="https://picsum.photos/510/300?random"
+                aspect-ratio="1.4"
+                contain
+              ></v-img>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+      }
+    });
+  </script>
+</body>
+</html>
