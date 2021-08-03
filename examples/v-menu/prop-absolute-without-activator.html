@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <div>
+          <v-row
+            class="flex"
+            justify="center"
+          >
+            <v-card
+              :ripple="false"
+              class="portrait"
+              img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
+              height="300px"
+              @contextmenu="show"
+            ></v-card>
+          </v-row>
+
+          <v-menu
+            v-model="showMenu"
+            :position-x="x"
+            :position-y="y"
+            absolute
+            offset-y
+          >
+            <v-list>
+              <v-list-item
+                v-for="(item, index) in items"
+                :key="index"
+              >
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        showMenu: false,
+        x: 0,
+        y: 0,
+        items: [
+          { title: 'Click Me' },
+          { title: 'Click Me' },
+          { title: 'Click Me' },
+          { title: 'Click Me 2' },
+        ],
+      },
+      methods: {
+        show (e) {
+          e.preventDefault()
+          this.showMenu = false
+          this.x = e.clientX
+          this.y = e.clientY
+          this.$nextTick(() => {
+            this.showMenu = true
+          })
+        },
+      },
+    });
+  </script>
+  <style scoped>
+  .portrait.v-card {
+    margin: 0 auto;
+    max-width: 600px;
+    width: 100%;
+  }
+  </style>  
+</body>
+</html>
