@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-responsive
+          class="overflow-y-auto"
+          max-height="400"
+        >
+          <div class="pa-6 text-center">
+            Scroll down
+          </div>
+
+          <v-responsive
+            height="200vh"
+            class="text-center pa-2"
+          >
+            <v-responsive min-height="50vh"></v-responsive>
+            <div class="text-center text-body-2 mb-12">
+              The card will appear below:
+            </div>
+
+            <v-lazy
+              v-model="isActive"
+              :options="{
+                threshold: .5
+              }"
+              min-height="200"
+              transition="fade-transition"
+            >
+              <v-card
+                class="mx-auto"
+                max-width="336"
+              >
+                <v-card-title>Card title</v-card-title>
+
+                <v-card-text>
+                  Phasellus magna. Quisque rutrum. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Aliquam lobortis. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna.
+
+                  In turpis. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. In turpis. Pellentesque dapibus hendrerit tortor. Ut varius tincidunt libero.
+                </v-card-text>
+              </v-card>
+            </v-lazy>
+          </v-responsive>
+        </v-responsive>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        isActive: false,        
+      }
+    });
+  </script>
+</body>
+</html>
