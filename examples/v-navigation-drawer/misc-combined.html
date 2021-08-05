@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-card
+          class="mx-auto"
+          height="300"
+          width="330"
+        >
+          <v-navigation-drawer
+            permanent
+            width="100%"
+          >
+            <v-row
+              class="fill-height"
+              no-gutters
+            >
+              <v-navigation-drawer
+                dark
+                mini-variant
+                mini-variant-width="56"
+                permanent
+              >
+                <v-list-item class="px-2">
+                  <v-list-item-avatar>
+                    <v-img src="https://randomuser.me/api/portraits/women/75.jpg"></v-img>
+                  </v-list-item-avatar>
+                </v-list-item>
+
+                <v-divider></v-divider>
+
+                <v-list
+                  dense
+                  nav
+                >
+                  <v-list-item
+                    v-for="item in items"
+                    :key="item.title"
+                  >
+                    <v-list-item-action>
+                      <v-icon>{{ item.icon }}</v-icon>
+                    </v-list-item-action>
+
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-list>
+              </v-navigation-drawer>
+
+              <v-list class="grow">
+                <v-list-item
+                  v-for="link in links"
+                  :key="link"
+                  link
+                >
+                  <v-list-item-title v-text="link"></v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-row>
+          </v-navigation-drawer>
+        </v-card>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        items: [
+          { title: 'Home', icon: 'mdi-view-dashboard' },
+          { title: 'About', icon: 'mdi-forum' },
+        ],
+        links: ['Home', 'Contacts', 'Settings'],
+        mini: true,        
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-card
+          class="mx-auto overflow-hidden"
+          height="400"
+          width="344"
+        >
+          <v-system-bar color="deep-purple darken-3"></v-system-bar>
+
+          <v-app-bar
+            color="deep-purple accent-4"
+            dark
+            prominent
+          >
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+            <v-toolbar-title>My files</v-toolbar-title>
+
+            <v-spacer></v-spacer>
+
+            <v-btn icon>
+              <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+
+            <v-btn icon>
+              <v-icon>mdi-filter</v-icon>
+            </v-btn>
+
+            <v-btn icon>
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </v-app-bar>
+
+          <v-navigation-drawer
+            v-model="drawer"
+            absolute
+            bottom
+            temporary
+          >
+            <v-list
+              nav
+              dense
+            >
+              <v-list-item-group
+                v-model="group"
+                active-class="deep-purple--text text--accent-4"
+              >
+                <v-list-item>
+                  <v-list-item-title>Foo</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-title>Bar</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-title>Fizz</v-list-item-title>
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-title>Buzz</v-list-item-title>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-navigation-drawer>
+
+          <v-card-text>
+            The navigation drawer will appear from the bottom on smaller size screens.
+          </v-card-text>
+        </v-card>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        drawer: false,
+        group: null,
+      },
+      watch: {
+        group () {
+          this.drawer = false
+        },
+      },
+    });
+  </script>
+</body>
+</html>
