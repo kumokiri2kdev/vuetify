@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-row
+          align="center"
+          justify="center"
+        >
+          <v-card
+            height="300"
+            width="250"
+          >
+            <v-row justify="center">
+              <v-btn
+                color="success"
+                class="mt-12"
+                @click="overlay = !overlay"
+              >
+                Show Overlay
+              </v-btn>
+
+              <v-overlay
+                :absolute="absolute"
+                :value="overlay"
+              >
+                <v-btn
+                  color="success"
+                  @click="overlay = false"
+                >
+                  Hide Overlay
+                </v-btn>
+              </v-overlay>
+            </v-row>
+          </v-card>
+        </v-row>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        absolute: true,
+        overlay: false,        
+      }
+    });
+  </script>
+</body>
+</html>
