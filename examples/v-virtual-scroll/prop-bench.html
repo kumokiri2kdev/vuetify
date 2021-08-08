@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <div>
+          <v-responsive
+            max-width="400"
+            class="mx-auto mb-4"
+          >
+            <v-text-field
+              v-model="benched"
+              type="number"
+              label="Total Benched"
+              min="0"
+              max="10"
+            ></v-text-field>
+          </v-responsive>
+
+          <v-card
+            elevation="16"
+            max-width="400"
+            class="mx-auto"
+          >
+            <v-virtual-scroll
+              :bench="benched"
+              :items="items"
+              height="300"
+              item-height="64"
+            >
+              <template v-slot:default="{ item }">
+                <v-list-item :key="item">
+                  <v-list-item-action>
+                    <v-btn
+                      fab
+                      small
+                      depressed
+                      color="primary"
+                    >
+                      {{ item }}
+                    </v-btn>
+                  </v-list-item-action>
+
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      User Database Record <strong>ID {{ item }}</strong>
+                    </v-list-item-title>
+                  </v-list-item-content>
+
+                  <v-list-item-action>
+                    <v-icon small>
+                      mdi-open-in-new
+                    </v-icon>
+                  </v-list-item-action>
+                </v-list-item>
+
+                <v-divider></v-divider>
+              </template>
+            </v-virtual-scroll>
+          </v-card>
+        </div>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        benched: 0,
+      },
+      computed: {
+        items () {
+          return Array.from({ length: this.length }, (k, v) => v + 1)
+        },
+        length () {
+          return 7000
+        },
+      },      
+    });
+  </script>
+</body>
+</html>
