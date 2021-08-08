@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-card>
+          <v-tabs
+            v-model="tab"
+            background-color="deep-purple accent-4"
+            centered
+            dark
+            icons-and-text
+          >
+            <v-tabs-slider></v-tabs-slider>
+
+            <v-tab href="#tab-1">
+              Recents
+              <v-icon>mdi-phone</v-icon>
+            </v-tab>
+
+            <v-tab href="#tab-2">
+              Favorites
+              <v-icon>mdi-heart</v-icon>
+            </v-tab>
+
+            <v-tab href="#tab-3">
+              Nearby
+              <v-icon>mdi-account-box</v-icon>
+            </v-tab>
+          </v-tabs>
+
+          <v-tabs-items v-model="tab">
+            <v-tab-item
+              v-for="i in 3"
+              :key="i"
+              :value="'tab-' + i"
+            >
+              <v-card flat>
+                <v-card-text>{{ text }}</v-card-text>
+              </v-card>
+            </v-tab-item>
+          </v-tabs-items>
+        </v-card>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        tab: null,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',        
+      }
+    });
+  </script>
+</body>
+</html>
