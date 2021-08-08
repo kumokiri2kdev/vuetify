@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-container>
+          <v-row>
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <v-skeleton-loader
+                v-bind="attrs"
+                type="card-avatar, article, actions"
+              ></v-skeleton-loader>
+
+              <v-skeleton-loader
+                v-bind="attrs"
+                type="date-picker"
+              ></v-skeleton-loader>
+            </v-col>
+
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <v-skeleton-loader
+                v-bind="attrs"
+                type="article, actions"
+              ></v-skeleton-loader>
+
+              <v-skeleton-loader
+                v-bind="attrs"
+                type="table-heading, list-item-two-line, image, table-tfoot"
+              ></v-skeleton-loader>
+            </v-col>
+
+            <v-col
+              cols="12"
+              md="4"
+            >
+              <v-skeleton-loader
+                v-bind="attrs"
+                type="list-item-avatar, divider, list-item-three-line, card-heading, image, actions"
+              ></v-skeleton-loader>
+
+              <v-skeleton-loader
+                v-bind="attrs"
+                type="list-item-avatar-three-line, image, article"
+              ></v-skeleton-loader>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        attrs: {
+          class: 'mb-6',
+          boilerplate: true,
+          elevation: 2,
+        },        
+      }
+    });
+  </script>
+</body>
+</html>
