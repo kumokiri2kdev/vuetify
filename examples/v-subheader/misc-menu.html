@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-row>
+          <v-col
+            cols="12"
+            sm="6"
+            offset-sm="3"
+          >
+            <v-card>
+              <v-toolbar
+                color="teal"
+                dark
+              >
+                <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+                <v-toolbar-title>Manage</v-toolbar-title>
+
+                <v-spacer></v-spacer>
+
+                <v-btn icon>
+                  <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+              </v-toolbar>
+
+              <v-list>
+                <template v-for="(item, index) in items">
+                  <v-list-item
+                    v-if="item.action"
+                    :key="item.title"
+                  >
+                    <v-list-item-action>
+                      <v-icon>{{ item.action }}</v-icon>
+                    </v-list-item-action>
+
+                    <v-list-item-content>
+                      <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-divider
+                    v-else-if="item.divider"
+                    :key="index"
+                  ></v-divider>
+
+                  <v-subheader
+                    v-else-if="item.header"
+                    :key="item.header"
+                  >
+                    {{ item.header }}
+                  </v-subheader>
+                </template>
+              </v-list>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        items: [
+          {
+            action: 'mdi-inbox-arrow-down',
+            title: 'Inbox',
+          },
+          {
+            action: 'mdi-send',
+            title: 'Sent',
+          },
+          {
+            action: 'mdi-delete',
+            title: 'Trash',
+          },
+          {
+            action: 'mdi-alert-octagon',
+            title: 'Spam',
+          },
+          { divider: true },
+          { header: 'Labels' },
+          {
+            action: 'mdi-label',
+            title: 'Family',
+          },
+          {
+            action: 'mdi-label',
+            title: 'Friends',
+          },
+          {
+            action: 'mdi-label',
+            title: 'Work',
+          },
+        ],        
+      }
+    });
+  </script>
+</body>
+</html>
