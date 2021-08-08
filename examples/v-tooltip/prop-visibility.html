@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-container
+          fluid
+          class="text-center"
+        >
+          <v-row
+            class="flex"
+            justify="space-between"
+          >
+            <v-col cols="12">
+              <v-btn @click="show = !show">
+                toggle
+              </v-btn>
+            </v-col>
+
+            <v-col
+              cols="12"
+              class="mt-12"
+            >
+              <v-tooltip
+                v-model="show"
+                top
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    <v-icon color="grey lighten-1">
+                      mdi-cart
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <span>Programmatic tooltip</span>
+              </v-tooltip>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        show: false,        
+      }
+    });
+  </script>
+</body>
+</html>
