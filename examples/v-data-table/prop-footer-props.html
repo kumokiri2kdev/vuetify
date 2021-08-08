@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-data-table
+          :headers="headers"
+          :items="desserts"
+          :items-per-page="5"
+          item-key="name"
+          class="elevation-1"
+          :footer-props="{
+            showFirstLastPage: true,
+            firstIcon: 'mdi-arrow-collapse-left',
+            lastIcon: 'mdi-arrow-collapse-right',
+            prevIcon: 'mdi-minus',
+            nextIcon: 'mdi-plus'
+          }"
+        ></v-data-table>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        headers: [
+          {
+            text: 'Dessert (100g serving)',
+            align: 'start',
+            value: 'name',
+          },
+          { text: 'Category', value: 'category' },
+        ],
+        desserts: [
+          {
+            name: 'Frozen Yogurt',
+            category: 'Ice cream',
+          },
+          {
+            name: 'Ice cream sandwich',
+            category: 'Ice cream',
+          },
+          {
+            name: 'Eclair',
+            category: 'Cookie',
+          },
+          {
+            name: 'Cupcake',
+            category: 'Pastry',
+          },
+          {
+            name: 'Gingerbread',
+            category: 'Cookie',
+          },
+          {
+            name: 'Jelly bean',
+            category: 'Candy',
+          },
+          {
+            name: 'Lollipop',
+            category: 'Candy',
+          },
+          {
+            name: 'Honeycomb',
+            category: 'Toffee',
+          },
+          {
+            name: 'Donut',
+            category: 'Pastry',
+          },
+          {
+            name: 'KitKat',
+            category: 'Candy',
+          },
+        ],        
+      }
+    });
+  </script>
+</body>
+</html>
