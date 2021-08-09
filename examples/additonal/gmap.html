@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+This example shows google map full in the content.
+For your trial, setting 'google map api key' to "YOUR_API_KEY".
+-->
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-main>
+        <div class="gmap">
+          <div id="map" class="inner_map">
+            <!--gmap-->
+          </div>
+        </div>
+      </v-main>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        map: null,
+      },
+      mounted () {
+        let location = new google.maps.LatLng(35.62410667945785, 139.7435494215383);
+        let mapCanvas = document.getElementById('map');
+        let mapOptions = {
+          center: location,
+          zoom: 9,
+          panControl: false,
+          scrollwheel: false,
+        }
+        this.map = new google.maps.Map(mapCanvas, mapOptions);
+      },
+    });
+  </script>
+  <style>
+    .gmap {
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+    .inner_map {
+        height: 100%;
+    }
+  </style>
+</body>
+</html>
