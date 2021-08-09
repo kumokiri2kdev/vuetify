@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-container fluid>
+          <v-row>
+            <v-textarea
+              v-model="message"
+              name="input-7-1"
+              filled
+              label="文字を入力"
+              auto-grow
+              value=""
+            ></v-textarea>
+          </v-row>
+          <v-row>
+            <v-btn
+              v-bind:disabled="postable"
+              depressed
+              color="primary"
+              v-on:click="send()"
+            >
+            送信
+            </v-btn>
+          </v-row>
+        </v-container>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.2.x/dist/axios.min.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        message: "",
+      },
+      methods:{
+        send:function(){
+          axios.post('post',{
+            message: this.message
+          },{headers: {'Access-Control-Allow-Origin': '*'}})
+          .then(response => {
+            this.message = "";
+          }).catch(response => {
+            console.log(response);
+          })
+        }
+      },
+      computed: {
+        postable: function() {
+          return !this.message.length > 0;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
