@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-row justify="center">
+          <h1 class="pa-md-4 font-weight-bold">
+            2021年度馬齢番組表
+          </h1>
+        </v-row>
+        <v-row justify="space-between">
+          <v-col cols=4 align="center">
+            <v-date-picker
+              v-model="date_yyyymm"
+              :events="arrayEvents"
+              :event-color="date => decideColor(date)"
+              v-on:change="setDate()"
+              :picker-date.sync="pickerDate"
+              full-width
+              first-day-of-week=1
+            ></v-date-picker>
+          </v-col>
+          <v-col cols=8 class="">
+            <v-list>
+              <v-list-item v-for="(place, index) in places" :key="place.kaisai">
+                <v-list-item-content>
+                  <v-list-item-title class="font-weight-bold">
+                    <v-divider v-if="index>0"></v-divider>
+                    <div class="mt-3 ml-2">{{ place.kaisai }}</div>
+                  </v-list-item-title>
+                  <v-list>
+                    <v-list-item v-for="race in place.races" :key="place.index" dense>
+                      <v-list-item-content>
+                        <v-row align="center">
+                          <v-col align="center">
+                            <v-chip
+                              color="primary"
+                              >
+                              {{ race.index }}R
+                            </v-chip>
+                          </v-col>
+                          <v-col cols=6 class="font-weight-black">
+                              {{ race.name }}
+                          </v-col>
+                          <v-col cols=2 align="center">
+                            <div v-if="race.name != race.class">
+                              {{ race.class }}
+                            </div>
+                          </v-col>
+
+                          <v-col cols=2 align="right">
+                              {{ race.course.substr(0, 1) }} {{ race.distance.replace(",","") }}
+                          </v-col>
+                        <v-row>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.2.x/dist/axios.min.js"></script>
+
+  <script>
+    const colorTable = {
+      '東京' : 'amber darken-1',
+      '中山' : 'blue-grey darken-1',
+      '京都' : 'lime darken-1',
+      '阪神' : 'teal darken-1',
+      '新潟' : 'blue darken-1',
+      '福島' : 'pink darken-1',
+      '中京' : 'brown darken-1',
+      '小倉' : 'deep-purple darken-1',
+      '札幌' : 'cyan darken-1',
+      '函館' : 'lime darken-1',
+    };
+
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        pickerDate: null,
+        arrayEvents: null,
+        kaisaiList:[],
+        places:[],
+        date_yyyymm: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+      },
+      mounted () {
+      },
+      methods: {
+        decideColor : function(date){
+          let kaisaiList = this.kaisaiList[date];
+          var colors = [];
+
+          for(let i = 0; i < kaisaiList.length; i++){
+            let tag = kaisaiList[i].kaisai.replace(/[0-9]*回/,'').replace(/[0-9]*日/,'')
+
+            if(tag in colorTable){
+              colors.push(colorTable[tag]);
+            } else {
+              colors.push('black');
+            }
+          }
+          return colors;
+        },
+        setDate: function() {
+          if (this.date_yyyymm in this.kaisaiList){
+            var places = [];
+            for(var i = 0; i < this.kaisaiList[this.date_yyyymm].length; i++){
+              places.push(this.kaisaiList[this.date_yyyymm][i]);
+            }
+            this.places = places;
+          } else {
+            this.places = [];
+          }
+        },
+        updateEvents: function(month) {
+          let path = 'api/event?month=' + month.replaceAll('-', '');
+          axios.get(path)
+          .then(response => {
+            this.kaisaiList = response;
+            let keys = Object.keys(response);
+            this.arrayEvents = keys;
+            this.setDate();
+          }).catch(response => {
+            console.log(response);
+          })
+        }
+      },
+      watch: {
+        pickerDate (newval,oldval) {
+          // here you can check if month changed using newval and oldval
+          this.updateEvents(newval);
+        },
+      },
+    });
+  </script>
+</body>
+</html>
