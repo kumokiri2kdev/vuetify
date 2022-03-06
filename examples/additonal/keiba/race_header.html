@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+    .vam {
+      vertical-align: middle; /*要素の縦の配置を指定*/
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <div>
+          <div class="d-inline-block">
+            <strong>{{race_info.date}}</strong>
+          </div>
+          <div class="d-inline-block">
+            <strong>{{race_info.place}}</strong>
+          </div>
+          <div class="d-inline-block ml-5">
+            <strong>天候 : {{race_info.weather}}</strong>
+          </div>
+          <div class="d-inline-block ml-2">
+            <strong>馬場 : {{race_info.course_cond}}</strong>
+          </div>
+        </div>
+        <div>
+          <div class="d-table" width="100%">
+            <div class="d-table-cell vam ml-5">
+              <v-sheet
+                class="pa-4"
+                color="green darken-2"
+                :rounded="true"
+                align="center"
+              >
+                <h2>{{race_info.index}}R</h2>
+              </v-sheet>
+            </div>
+            <div class="d-table-cell vam ml-5" >
+                <div class="ml-2">
+                  <h2>
+                    {{race_info.name}}
+                  </h2>
+                </div>
+                <div class="ml-4 d-flex">
+                  <div >
+                    {{race_info.category}}
+                  </div>
+                  <div>
+                    {{race_info.class}}
+                  </div>
+                  <div>
+                    {{race_info.rule}}
+                  </div>
+                  <div>
+                    {{race_info.weight}}
+                  </div>
+                  <div class="ml-10">
+                    <strong>{{race_info.course}}  {{race_info.distance}}メートル</strong>
+                  </div>
+
+
+                </div>
+            </div>
+          </div>
+        </div>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        message: 'Format',
+        race_info : {
+          'date': '2022年2月6日',
+          'weekday': '日曜',
+          'index': 11,
+          'place': '中京',
+          'nichisuu': 12,
+          'weather': '晴',
+          'course': '芝・左',
+          'course_cond': '稍重',
+          'departure': '15時35分',
+          'name': 'きさらぎ賞',
+          'grade': 'GⅢ',
+          'category': '3歳',
+          'class': 'オープン',
+          'rule': '（国際）（特指）',
+          'weight': '別定',
+          'distance': 2000
+        }
+      }
+    });
+
+  </script>
+</body>
+</html>
