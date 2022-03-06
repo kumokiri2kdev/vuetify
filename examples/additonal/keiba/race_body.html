@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5 mb-6">
+        <v-simple-table>
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-center blue-grey darken-1" width="40">
+                  <span class="white--text">着順</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="40">
+                  <span class="white--text">枠</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="40">
+                  <span class="white--text">馬番</span>
+                </th>
+                <th class="text-center blue-grey darken-1">
+                  <span class="white--text">馬名</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="60">
+                  <span class="white--text">性齢</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="60">
+                  <span class="white--text">斤量</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="120">
+                  <span class="white--text">騎手</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="80">
+                  <span class="white--text">タイム</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="60">
+                  <span class="white--text">タイム差</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="80">
+                  <span class="white--text">着差</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="60">
+                  <span class="white--text">上り</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="120">
+                  <span class="white--text">馬体重</span>
+                </th>
+                <th class="text-center blue-grey darken-1" width="120">
+                  <span class="white--text">調教師</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(item, index) in race_info.horses" :key="item.name"
+              >
+                <td class="text-center">{{ item.place }}</td>
+                <td class="text-center">
+                  <v-sheet
+                    class="pa-2"
+                    :color=waku_color(item.waku)
+                    :rounded="true"
+                    align="center"
+                  >
+                    {{item.waku}}
+                  </v-sheet>
+                </td>
+                <td class="text-center">{{ item.num }}</td>
+                <td>{{ item.name }}</td>
+                <td class="text-center">{{ item.sex }}{{ item.age }}</td>
+                <td class="text-center">{{ item.hande }}</td>
+                <td class="text-center">{{ item.jockey.name }}</td>
+                <td class="text-center">{{ item.finish }}</td>
+                <td class="text-center">{{ time_diff(item, index)}}</td>
+                <td class="text-center">{{ gap(item) }}</td>
+                <td class="text-center">{{ item.flap }}</td>
+                <td class="text-center">{{ weight_val(item) }}</td>
+                <td class="text-center">{{ item.trainer.name }}</td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+  <script>
+    const waku_colors = [
+      "grey lighten-5",
+      "grey lighten-1",
+      "red darken-2",
+      "blue accent-2",
+      "yellow accent-3",
+      "green darken-2",
+      "orange lighten-1",
+      "pink lighten-2"
+    ];
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        message: 'Format',
+        race_info: {
+          'date': '2022年2月6日', 'weekday': '日曜', 'index': 11, 'place': '中京', 'nichisuu': 12, 'weather': '晴', 'course': '芝・左', 'course_cond': '稍重',
+          'departure': '15時35分', 'name': 'きさらぎ賞', 'grade': 'GⅢ', 'category': '3歳', 'class': 'オープン', 'rule': '（国際）（特指）', 'weight': '別定',
+           'distance': 2000, 'odds': ['/JRADB/accessO.html', 'pw151ou1007202201121120220206Z/EF'],
+           'horses': [
+              {'place': 1, 'waku': 2, 'num': 2, 'name': 'マテンロウレオ', 'url': ['/JRADB/accessU.html', 'pw01dud102019102879/07'], 'age': 3, 'sex': '牡', 'hande': 56.0, 'jockey': {'name': '横山 典弘', 'url': ['/JRADB/accessK.html', 'pw04kmk000660/43']}, 'finish': 1205, 'corner': {'1': 8, '2': 8, '3': 7, '4': 7}, 'flap': 350, 'weight': 476, 'weight_diff': -2, 'trainer': {'name': '昆 貢', 'url': ['/JRADB/accessC.html', 'pw05cmk001044/4D']}, 'win_fav': 2},
+              {'place': 2, 'waku': 3, 'num': 3, 'name': 'ダンテスヴュー', 'url': ['/JRADB/accessU.html', 'pw01dud102019106933/02'], 'age': 3, 'sex': '牡', 'hande': 56.0, 'jockey': {'name': '川田 将雅', 'url': ['/JRADB/accessK.html', 'pw04kmk001088/E6']}, 'finish': 1205, 'margin': 'ハナ', 'corner': {'1': 7, '2': 5, '3': 5, '4': 5}, 'flap': 353, 'weight': 452, 'weight_diff': -6, 'trainer': {'name': '友道 康夫', 'url': ['/JRADB/accessC.html', 'pw05cmk001061/7F']}, 'win_fav': 3},
+              {'place': 3, 'waku': 8, 'num': 11, 'name': 'メイショウゲキリン', 'url': ['/JRADB/accessU.html', 'pw01dud102019104092/58'], 'age': 3, 'sex': '牡', 'hande': 56.0, 'jockey': {'name': '幸 英明', 'url': ['/JRADB/accessK.html', 'pw04kmk000732/64']}, 'finish': 1207, 'margin': '１ 1/2', 'corner': {'1': 1, '2': 1, '3': 1, '4': 1}, 'flap': 361, 'weight': 506, 'weight_diff': -4, 'trainer': {'name': '池添 兼雄', 'url': ['/JRADB/accessC.html', 'pw05cmk001021/D3']}, 'win_fav': 8},
+              {'place': 4, 'waku': 4, 'num': 4, 'name': 'アスクワイルドモア', 'url': ['/JRADB/accessU.html', 'pw01dud102019104937/F0'], 'age': 3, 'sex': '牡', 'hande': 56.0, 'jockey': {'name': '武 豊', 'url': ['/JRADB/accessK.html', 'pw04kmk000666/8B']}, 'finish': 1207, 'margin': 'クビ', 'corner': {'1': 10, '2': 9, '3': 8, '4': 7}, 'flap': 351, 'weight': 464, 'weight_diff': -10, 'trainer': {'name': '藤原 英昭', 'url': ['/JRADB/accessC.html', 'pw05cmk001055/44']}, 'win_fav': 6},
+              {'place': 5, 'waku': 6, 'num': 6, 'name': 'ストロングウィル', 'url': ['/JRADB/accessU.html', 'pw01dud102019103358/6E'], 'age': 3, 'sex': '牡', 'hande': 56.0, 'jockey': {'name': '松山 弘平', 'url': ['/JRADB/accessK.html', 'pw04kmk001126/96']}, 'finish': 1212, 'margin': '３', 'corner': {'1': 3, '2': 3, '3': 3, '4': 3}, 'flap': 362, 'weight': 480, 'weight_diff': 0, 'trainer': {'name': '橋口 慎介', 'url': ['/JRADB/accessC.html', 'pw05cmk001154/02']}, 'win_fav': 1},
+              {'place': 6, 'waku': 6, 'num': 7, 'name': 'フォースクエア', 'url': ['/JRADB/accessU.html', 'pw01dud102019105299/CE'], 'age': 3, 'sex': '牡', 'hande': 56.0, 'jockey': {'name': '池添 謙一', 'url': ['/JRADB/accessK.html', 'pw04kmk001032/87']}, 'finish': 1214, 'margin': '１', 'corner': {'1': 8, '2': 9, '3': 8, '4': 9}, 'flap': 357, 'weight': 474, 'weight_diff': -2, 'trainer': {'name': '池江 泰寿', 'url': ['/JRADB/accessC.html', 'pw05cmk001071/EA']}, 'win_fav': 5},
+              {'place': 7, 'waku': 7, 'num': 9, 'name': 'トーセンヴァンノ', 'url': ['/JRADB/accessU.html', 'pw01dud102019104409/B1'], 'age': 3, 'sex': '牡', 'hande': 56.0, 'jockey': {'name': '団野 大成', 'url': ['/JRADB/accessK.html', 'pw04kmk001180/D0']}, 'finish': 1214, 'margin': 'クビ', 'corner': {'1': 11, '2': 11, '3': 10, '4': 9}, 'flap': 356, 'weight': 482, 'weight_diff': -12, 'trainer': {'name': '小桧山 悟', 'url': ['/JRADB/accessC.html', 'pw05cmk001005/2D']}, 'win_fav': 11},
+              {'place': 8, 'waku': 7, 'num': 8, 'name': 'セルケト', 'url': ['/JRADB/accessU.html', 'pw01dud102019105272/89'], 'age': 3, 'sex': '牝', 'hande': 54.0, 'jockey': {'name': '岩田 望来', 'url': ['/JRADB/accessK.html', 'pw04kmk001174/95']}, 'finish': 1215, 'margin': '１／２', 'corner': {'1': 2, '2': 2, '3': 2, '4': 2}, 'flap': 368, 'weight': 478, 'weight_diff': -6, 'trainer': {'name': '斉藤 崇史', 'url': ['/JRADB/accessC.html', 'pw05cmk001151/5E']}, 'win_fav': 7},
+              {'place': 9, 'waku': 8, 'num': 10, 'name': 'シェルビーズアイ', 'url': ['/JRADB/accessU.html', 'pw01dud102019102531/9C'], 'age': 3, 'sex': '牡', 'hande': 56.0, 'jockey': {'name': '松田 大作', 'url': ['/JRADB/accessK.html', 'pw04kmk001030/6F']}, 'finish': 1215, 'margin': 'アタマ', 'corner': {'1': 6, '2': 5, '3': 5, '4': 5}, 'flap': 363, 'weight': 468, 'weight_diff': -4, 'trainer': {'name': '武 英智', 'url': ['/JRADB/accessC.html', 'pw05cmk001161/C9']}, 'win_fav': 9},
+              {'place': 10, 'waku': 1, 'num': 1, 'name': 'エアアネモイ', 'url': ['/JRADB/accessU.html', 'pw01dud102019110096/36'], 'age': 3, 'sex': '牡', 'hande': 56.0, 'jockey': {'name': '福永 祐一', 'url': ['/JRADB/accessK.html', 'pw04kmk001014/C9']}, 'finish': 1233, 'margin': '大差', 'corner': {'1': 3, '2': 3, '3': 3, '4': 3}, 'flap': 383, 'weight': 520, 'weight_diff': 0, 'trainer': {'name': '池添 学', 'url': ['/JRADB/accessC.html', 'pw05cmk001144/97']}, 'win_fav': 4},
+              {'place': 11, 'waku': 5, 'num': 5, 'name': 'ショウナンマグマ', 'url': ['/JRADB/accessU.html', 'pw01dud102019104998/C3'], 'age': 3, 'sex': '牡', 'hande': 56.0, 'jockey': {'name': '吉田 豊', 'url': ['/JRADB/accessK.html', 'pw04kmk000733/F0']}, 'finish': 1250, 'margin': '１０', 'corner': {'1': 3, '2': 5, '3': 11, '4': 11}, 'flap': 389, 'weight': 508, 'weight_diff': 4, 'trainer': {'name': '尾関 知人', 'url': ['/JRADB/accessC.html', 'pw05cmk001103/5F']}, 'win_fav': 10}
+              ],
+              'laps': [127, 113, 122, 123, 121, 119, 121, 119, 118, 122],
+              'ftime': {'4F': 480, '3F': 359},
+              'corner': {'1': '11,8(1,6,5)10,3(2,7)4-9', '2': '11,8-(1,6)(3,10,5)2(4,7)-9', '3': '(*11,8)-(1,6)(3,10)-2-(4,7)9,5', '4': '11,8(1,6)(3,10)(4,2)(9,7)-5'},
+              'pay_off': {'win': [{'tag': '2', 'price': 400, 'fav': 2}], 'place': [{'tag': '2', 'price': 150, 'fav': 3}, {'tag': '3', 'price': 150, 'fav': 1}, {'tag': '11', 'price': 460, 'fav': 8}], 'wakuren': [{'tag': '2-3', 'price': 810, 'fav': 3}], 'wide': [{'tag': '2-3', 'price': 320, 'fav': 1}, {'tag': '2-11', 'price': 1610, 'fav': 22}, {'tag': '3-11', 'price': 1580, 'fav': 20}], 'umaren': [{'tag': '2-3', 'price': 790, 'fav': 3}], 'umatan': [{'tag': '2-3', 'price': 1560, 'fav': 3}], 'trio': [{'tag': '2-3-11', 'price': 6820, 'fav': 26}], 'tierce': [{'tag': '2-3-11', 'price': 26860, 'fav': 97}]}
+            }
+      },
+      methods: {
+        gap: function(horse_result) {
+          if(horse_result.margin != undefined){
+            return(horse_result.margin);
+          }
+          return("");
+        },
+        weight_val: function(horse_result){
+          return(horse_result.weight + '(' + horse_result.weight_diff + ')');
+        },
+        time_diff: function(horse_result, index){
+          if(index === 1){
+            return 0;
+          } else {
+            // ToDo Handle NOT int case.
+            return (horse_result.finish - this.race_info.horses[0].finish)
+
+          }
+        },
+        waku_color: function(waku){
+          return(waku_colors[waku-1]);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
