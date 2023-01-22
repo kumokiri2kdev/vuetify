@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta charset="utf-8"/>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+      <v-container class="grey lighten-5">
+        <v-row>
+            <v-col cols="10" justify="center">
+
+                <div align="center">
+                    <video id="video" controls></video>
+                </div>
+            </v-col>
+            <v-col cols="2" justify="center">
+                <div
+                    align="center">
+                    <v-btn
+                        depressed
+                        color="primary"
+                        @click="play_video()"
+                        :disabled="!canPlay"
+                    >
+                    Play
+                  </v-btn>  
+                  <div>
+                    {{pos}}
+                  </div>
+                </div>
+            </v-col>
+        </v-row>
+      </v-container>
+    </v-app>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.14.5/hls.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      vuetify: new Vuetify,
+      data: {
+        message: 'Format',
+        canPlay: false,
+        pos : -1
+      },
+      mounted(){
+        var video = document.getElementById('video');
+		var videoSrc = 'https://eqc834rezx.eq.webcdn.stream.ne.jp/www50/eqc834rezx/jmc_pub/jmc_pd/00033/4569f551791e499f92d6f4263615704f/4569f551791e499f92d6f4263615704f_8.m3u8';
+		//
+		// First check for native browser HLS support
+		//
+		if (video.canPlayType('application/vnd.apple.mpegurl')) {
+		  video.src = videoSrc;
+			//
+			// If no native HLS support, check if HLS.js is supported
+			//
+		} else if (Hls.isSupported()) {
+		  var hls = new Hls();
+			hls.loadSource(videoSrc);
+			hls.attachMedia(video);
+		}
+    video.oncanplay = (event) => {
+        console.log('動画は開始できますが、最後まで再生されるかどうかはわかりません。');
+        this.canPlay = true;
+      };
+    video.ontimeupdate = (event) => {
+      this.pos = Math.round(video.currentTime);
+    };
+    },
+      methods: {
+        play_video: function() {
+            var video = document.getElementById('video');
+            video.play();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+
